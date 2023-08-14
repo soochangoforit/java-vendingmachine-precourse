@@ -19,6 +19,7 @@ public class InputView {
         String rawMachineMoney = Console.readLine();
         InputValidator.validateMachineMoney(rawMachineMoney);
         int machineMoney = InputConverter.convertMachineMoney(rawMachineMoney);
+        System.out.println();
         return new MachineMoneyDto(machineMoney);
     }
 }

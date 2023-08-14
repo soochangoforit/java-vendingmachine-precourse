@@ -57,15 +57,5 @@ public enum Coin {
     private int getAmount() {
         return amount;
     }
-
-
-    // 추가 기능 구현
-
-
-    @Override
-    public String toString() {
-        return "Coin{" +
-                "amount=" + amount +
-                '}';
-    }
+    
 }
