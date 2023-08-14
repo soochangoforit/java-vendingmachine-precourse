@@ -54,8 +54,8 @@ public enum Coin {
                 .collect(toList());
     }
 
-    private int getAmount() {
+    public int getAmount() {
         return amount;
     }
-    
+
 }

@@ -6,6 +6,10 @@ import vendingmachine.domain.Coin;
 
 public class OutputView {
 
+    private static final String COINS_MESSAGE = "자판기가 보유한 동전";
+    // 500원 - 0개
+    private static final String COINS_FORMAT = "%d원 - %d개";
+
     private OutputView() {
     }
 
@@ -18,8 +22,8 @@ public class OutputView {
     }
 
     public void printCoins(Map<Coin, Integer> coins) {
-        System.out.println("자판기가 보유한 동전");
-        coins.forEach((coin, count) -> System.out.println(coin + " : " + count + "개"));
+        System.out.println(COINS_MESSAGE);
+        coins.forEach((coin, count) -> System.out.printf(COINS_FORMAT, coin.getAmount(), count));
         System.out.println();
     }
 }
