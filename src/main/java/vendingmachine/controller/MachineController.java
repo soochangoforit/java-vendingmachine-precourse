@@ -2,6 +2,10 @@ package vendingmachine.controller;
 
 import static vendingmachine.util.RetryUtil.read;
 
+import java.util.Map;
+
+import vendingmachine.domain.Coin;
+import vendingmachine.domain.MachineMoney;
 import vendingmachine.domain.Picker;
 import vendingmachine.dto.MachineMoneyDto;
 import vendingmachine.view.InputView;
@@ -17,7 +21,7 @@ public class MachineController {
 
     public void run() {
         MachineMoneyDto machineMoneyDto = read(inputView::readMachineMoney);
-
-
+        MachineMoney machineMoney = MachineMoney.init(machineMoneyDto.getMachineMoney());
+        Map<Coin, Integer> coins = Coin.generateCoins(machineMoney, picker);
     }
 }

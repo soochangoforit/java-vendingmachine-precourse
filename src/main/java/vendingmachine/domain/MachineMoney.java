@@ -25,4 +25,16 @@ public class MachineMoney {
     public static MachineMoney init(int money) {
         return new MachineMoney(money);
     }
+
+    public boolean isLeftMoreThan(int pickedMoney) {
+        return money >= pickedMoney;
+    }
+
+    public MachineMoney subtract(int pickedMoney) {
+        return new MachineMoney(money - pickedMoney);
+    }
+
+    public boolean isZero() {
+        return money == ZERO;
+    }
 }
