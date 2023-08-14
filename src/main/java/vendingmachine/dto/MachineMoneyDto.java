@@ -1,11 +1,12 @@
 package vendingmachine.dto;
 
 import static vendingmachine.domain.ExceptionMessage.INVALID_MACHINE_MONEY;
+import static vendingmachine.domain.MachineMoney.DIVIDABLE_MIN_MONEY;
+import static vendingmachine.domain.MachineMoney.ZERO;
 
 public class MachineMoneyDto {
 
-    private final int DIVIDABLE_MIN_MONEY = 10;
-    private final int ZERO = 0;
+
     private final int machineMoney;
 
     public MachineMoneyDto(int machineMoney) {
@@ -24,4 +25,7 @@ public class MachineMoneyDto {
     }
 
 
+    public int getMachineMoney() {
+        return machineMoney;
+    }
 }
