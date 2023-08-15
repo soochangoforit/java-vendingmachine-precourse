@@ -17,11 +17,10 @@ public class Products {
         return new Products(products);
     }
 
-    public ProductInfo getProduct(String productName) {
+    public Product getProduct(String productName) {
         return products.stream()
                 .filter(product -> product.isSameName(productName))
                 .findFirst()
-                .map(product -> new ProductInfo(productName, product.getPrice()))
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_PRODUCT_NAME));
     }
 
@@ -37,10 +36,4 @@ public class Products {
                 .allMatch(Product::isSoldOut);
     }
 
-    public void decreaseProduct(String productName) {
-        products.stream()
-                .filter(product -> product.isSameName(productName))
-                .findFirst()
-                .ifPresent(Product::decreaseQuantity);
-    }
 }

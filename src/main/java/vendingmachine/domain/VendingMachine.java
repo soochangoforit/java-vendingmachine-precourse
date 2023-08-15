@@ -21,9 +21,9 @@ public class VendingMachine {
     }
 
     public void buyProduct(String productName, UserMoney userMoney) {
-        ProductInfo productToBuy = products.getProduct(productName);
+        Product productToBuy = products.getProduct(productName);
         // 재고 감소
-        products.decreaseProduct(productToBuy.getProductName());
+        productToBuy.decreaseQuantity();
         // 사용자 돈 감소
         userMoney.decreaseMoney(productToBuy.getPrice());
     }
