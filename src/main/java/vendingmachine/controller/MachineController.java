@@ -8,7 +8,7 @@ import java.util.Map;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.MachineMoney;
 import vendingmachine.domain.Picker;
-import vendingmachine.domain.Product;
+import vendingmachine.domain.ProductInfo;
 import vendingmachine.domain.Products;
 import vendingmachine.domain.ProductsFactory;
 import vendingmachine.domain.UserMoney;
@@ -37,11 +37,12 @@ public class MachineController {
         Products products = read(this::getProducts);
         VendingMachine vendingMachine = VendingMachine.init(products, coins);
         UserMoney userMoney = read(this::getUserMoney);
-        Product productToBuy = read(this::getProductToBuy, vendingMachine, userMoney);
+        ProductInfo productToBuy = read(this::getProductToBuy, vendingMachine, userMoney);
+
 
     }
 
-    private Product getProductToBuy(VendingMachine vendingMachine, UserMoney userMoney) {
+    private ProductInfo getProductToBuy(VendingMachine vendingMachine, UserMoney userMoney) {
         ProductToBuyDto productToBuyDto = inputView.readProductToBuy(userMoney);
         return vendingMachine.getProduct(productToBuyDto.getProductName());
     }

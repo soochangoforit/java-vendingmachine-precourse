@@ -15,7 +15,7 @@ public class VendingMachine {
         return new VendingMachine(products, coins);
     }
 
-    public Product getProduct(String productName) {
+    public ProductInfo getProduct(String productName) {
         return products.getProduct(productName);
     }
 }

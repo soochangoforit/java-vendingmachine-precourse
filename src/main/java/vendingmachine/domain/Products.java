@@ -16,10 +16,11 @@ public class Products {
         return new Products(products);
     }
 
-    public Product getProduct(String productName) {
+    public ProductInfo getProduct(String productName) {
         return products.stream()
                 .filter(product -> product.isSameName(productName))
-                .findAny()
+                .findFirst()
+                .map(product -> new ProductInfo(productName, product.getPrice()))
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_PRODUCT_NAME));
     }
 }
