@@ -15,6 +15,6 @@ public class ProductDto {
 
 
     public Product toProduct() {
-        return Product.init(name, price, quantity);
+        return Product.of(name, price, quantity);
     }
 }

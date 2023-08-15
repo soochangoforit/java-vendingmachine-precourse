@@ -26,7 +26,7 @@ public class Product {
         return price >= 100;
     }
 
-    public static Product init(String name, int price, int quantity) {
+    public static Product of(String name, int price, int quantity) {
         return new Product(name, price, quantity);
     }
 }
