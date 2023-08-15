@@ -16,8 +16,8 @@ public class Products {
         return new Products(products);
     }
 
-    public void validateExistProduct(String productName) {
-        products.stream()
+    public Product getProduct(String productName) {
+        return products.stream()
                 .filter(product -> product.isSameName(productName))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_PRODUCT_NAME));

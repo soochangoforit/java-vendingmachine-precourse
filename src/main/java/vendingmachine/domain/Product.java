@@ -36,4 +36,8 @@ public class Product {
     public boolean isSameName(String productName) {
         return name.equals(productName);
     }
+
+    public int getPrice() {
+        return price;
+    }
 }
