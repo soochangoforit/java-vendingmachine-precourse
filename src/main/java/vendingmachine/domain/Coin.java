@@ -14,6 +14,9 @@ public enum Coin {
     COIN_50(50),
     COIN_10(10);
 
+    private static final int MIN_COUNT = 0;
+    private static final int PLUS_COUNT = 1;
+
     private final int amount;
 
     Coin(final int amount) {
@@ -26,11 +29,15 @@ public enum Coin {
         while (!machineMoney.isZero()) {
             int pickedMoney = pick(machineMoney, picker);
             Coin coin = findCoin(pickedMoney);
-            coins.put(coin, coins.getOrDefault(coin, 0) + 1);
+            addCoint(coins, coin);
             machineMoney = machineMoney.minus(pickedMoney);
         }
 
         return coins;
+    }
+
+    private static void addCoint(EnumMap<Coin, Integer> coins, Coin coin) {
+        coins.put(coin, coins.getOrDefault(coin, MIN_COUNT) + PLUS_COUNT);
     }
 
     private static void initCoins(EnumMap<Coin, Integer> coins) {
