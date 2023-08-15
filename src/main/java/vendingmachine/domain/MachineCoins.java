@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -19,25 +20,28 @@ public class MachineCoins {
         return coins;
     }
 
-    public Map<Coin, Integer> changeToCoins(int userChange) {
+
+    public Map<Coin, Integer> changeToUserCoins(UserMoney userMoney) {
         Map<Coin, Integer> userCoins = new EnumMap<>(Coin.class);
-        for (Coin coin : Coin.values()) {
-            // 해당 금액으로는 반환할 동전이 없는 경우
-            if (coins.get(coin) == 0) {
-                continue;
-            }
-            // 현재 기준이 되는 동전이 사용자 금액보다 큰 경우
-            if (userChange < coin.getAmount()) {
-                continue;
-            }
-            // 해당 동전으로 반환할 수 있는 경우
-            // 가지고 있는 동전만큼만 반환
-            Integer coinCount = coins.get(coin);
-            int actualCount = userChange / coin.getAmount();
-            int count = Math.min(coinCount, actualCount);
-            userCoins.put(coin, count);
-            userChange -= coin.getAmount() * count;
-        }
+        Arrays.stream(Coin.values())
+                .filter(coin -> isCoinAvailableForChange(coin, userMoney.getUserMoney()))
+                .forEach(coin -> {
+                    int count = determineCoinCount(coin, userMoney.getUserMoney());
+                    userCoins.put(coin, count);
+                    userMoney.decreaseMoney(coin.getAmount() * count);
+                });
         return userCoins;
     }
+
+    // 동전이 하나라도 있어야 한다 && 반환할 코인이 사용자 금액보다 작아야 한다.
+    private boolean isCoinAvailableForChange(Coin coin, int userChange) {
+        return coins.get(coin) > 0 && userChange >= coin.getAmount();
+    }
+
+    // 가지고 있는 동전의 개수와 사용자 금액을 비교하여 반환할 최소 동전의 개수를 결정한다.
+    private int determineCoinCount(Coin coin, int userChange) {
+        int maxCountWithUserChange = userChange / coin.getAmount();
+        return Math.min(coins.get(coin), maxCountWithUserChange);
+    }
+
 }
