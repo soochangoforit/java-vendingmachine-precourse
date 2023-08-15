@@ -8,7 +8,7 @@ public class OutputView {
 
     private static final String COINS_MESSAGE = "자판기가 보유한 동전";
     // 500원 - 0개
-    private static final String COINS_FORMAT = "%d원 - %d개";
+    private static final String COINS_FORMAT = "%d원 - %d개\n";
 
     private OutputView() {
     }
