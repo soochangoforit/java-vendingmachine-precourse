@@ -1,9 +1,12 @@
 package vendingmachine.domain;
 
+import static vendingmachine.domain.ExceptionMessage.INVALID_PRODUCT_PRICE;
+
 import vendingmachine.util.NullOrEmptyValidator;
 
 public class Product {
 
+    private static final int MINIMUM_PRICE = 100;
     private final String name;
     private final int price;
     private final int quantity;
@@ -18,12 +21,12 @@ public class Product {
     private void validate(String name, int price) {
         NullOrEmptyValidator.throwIfBlank(name);
         if (!isMinimumPrice(price)) {
-            throw new IllegalArgumentException("상품의 가격은 100원 이상여야 합니다.");
+            throw new IllegalArgumentException(INVALID_PRODUCT_PRICE);
         }
     }
 
     private static boolean isMinimumPrice(int price) {
-        return price >= 100;
+        return price >= MINIMUM_PRICE;
     }
 
     public static Product of(String name, int price, int quantity) {
