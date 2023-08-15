@@ -32,25 +32,39 @@ public class MachineController {
 
     public void run() {
         MachineMoney machineMoney = read(this::getMachineMoney);
+        MachineCoins machineCoins = getMachineCoins(machineMoney);
+        Products products = read(this::getProducts);
+        VendingMachine vendingMachine = initVendingMachine(machineCoins, products);
+        UserMoney userMoney = read(this::getUserMoney);
+        productPerchase(vendingMachine, userMoney);
+    }
+
+    private static VendingMachine initVendingMachine(MachineCoins machineCoins, Products products) {
+        return VendingMachine.init(products, machineCoins);
+    }
+
+    private MachineCoins getMachineCoins(MachineMoney machineMoney) {
         MachineCoins machineCoins = Coin.generateCoins(machineMoney, picker);
         outputView.printCoins(machineCoins.getCoins());
-        Products products = read(this::getProducts);
-        VendingMachine vendingMachine = VendingMachine.init(products, machineCoins);
-        UserMoney userMoney = read(this::getUserMoney);
+        return machineCoins;
+    }
 
-        // UserMoney가 최저 상품 가격보다 작은 경우 || 모두 소진된 경우 => 잔돈 출력
-        while (true) {
-            if (userMoney.isLessThanMinimumPrice(vendingMachine) || vendingMachine.isAllSoldOut()) {
-                // 투입 금액 및 잔돈(동전) 출력
-                Map<Coin, Integer> userChangeCoins = vendingMachine.returnChange(userMoney);
-                outputView.printUserChange(userMoney, userChangeCoins);
-                break;
-            }
-            // 상품 구매 (해당 상품만 재고가 부족한 경우 || 해당 상품에 대한 잔액이 부족한 경우)
+    private void productPerchase(VendingMachine vendingMachine, UserMoney userMoney) {
+        while (!isUserMoneyLessOrProductsSoldOut(vendingMachine, userMoney)) {
             read(this::buyProduct, vendingMachine, userMoney);
         }
-
+        processUserChange(vendingMachine, userMoney);
     }
+
+    private boolean isUserMoneyLessOrProductsSoldOut(VendingMachine vendingMachine, UserMoney userMoney) {
+        return userMoney.isLessThanMinimumPrice(vendingMachine) || vendingMachine.isAllSoldOut();
+    }
+
+    private void processUserChange(VendingMachine vendingMachine, UserMoney userMoney) {
+        Map<Coin, Integer> userChangeCoins = vendingMachine.returnChange(userMoney);
+        outputView.printUserChange(userMoney, userChangeCoins);
+    }
+
 
     private void buyProduct(VendingMachine vendingMachine, UserMoney userMoney) {
         ProductToBuyDto productToBuyDto = inputView.readProductToBuy(userMoney);
