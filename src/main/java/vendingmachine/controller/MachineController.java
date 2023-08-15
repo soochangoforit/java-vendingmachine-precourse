@@ -41,7 +41,7 @@ public class MachineController {
 
         // UserMoney가 최저 상품 가격보다 작은 경우 || 모두 소진된 경우 => 잔돈 출력
         while (true) {
-            if (userMoney.isLessThanMinimumPrice(vendingMachine) || vendingMachine.isSoldOut()) {
+            if (userMoney.isLessThanMinimumPrice(vendingMachine) || vendingMachine.isAllSoldOut()) {
                 // 투입 금액 및 잔돈(동전) 출력
                 Map<Coin, Integer> userChangeCoins = vendingMachine.returnChange(userMoney);
                 outputView.printUserChange(userMoney, userChangeCoins);

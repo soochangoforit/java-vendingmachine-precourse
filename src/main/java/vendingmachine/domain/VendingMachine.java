@@ -20,7 +20,7 @@ public class VendingMachine {
     }
 
 
-    public boolean isSoldOut() {
+    public boolean isAllSoldOut() {
         return products.isSoldOut();
     }
 
