@@ -1,7 +1,10 @@
 package vendingmachine.view;
 
+import java.util.List;
+
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.dto.MachineMoneyDto;
+import vendingmachine.dto.ProductDto;
 import vendingmachine.util.InputConverter;
 import vendingmachine.util.InputValidator;
 
@@ -21,5 +24,12 @@ public class InputView {
         int machineMoney = InputConverter.convertMachineMoney(rawMachineMoney);
         System.out.println();
         return new MachineMoneyDto(machineMoney);
+    }
+
+    public List<ProductDto> readProducts() {
+        System.out.println("상품명과 가격, 수량을 입력해 주세요.");
+        String inputProducts = Console.readLine();
+        InputValidator.validateProducts(inputProducts);
+        return InputConverter.convertProducts(inputProducts);
     }
 }

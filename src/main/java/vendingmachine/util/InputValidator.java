@@ -34,6 +34,7 @@ public final class InputValidator {
     // 숫자만 가능, ", " 구분자
     private static final Pattern NUMBER_COMMA_SPACE_FORMAT = Pattern.compile("[0-9]+(,\\s[0-9]+)*");
 
+    private static final Pattern PRODUCT_FORMAT = Pattern.compile("^(?:\\[[가-힣]+,[0-9]+,[0-9]+\\];?)+$");
 
     private static final String BLANK_EXCEPTION_MESSAGE = "공백은 입력할 수 없습니다.";
     private static final String FORMAT_EXCEPTION_MESSAGE = "형식에 맞지 않습니다.";
@@ -47,6 +48,15 @@ public final class InputValidator {
             throw new IllegalArgumentException(BLANK_EXCEPTION_MESSAGE);
         }
         if (!isRightFormat(NUMBER_FORMAT, machineMoney)) {
+            throw new IllegalArgumentException(FORMAT_EXCEPTION_MESSAGE);
+        }
+    }
+
+    public static void validateProducts(String inputProducts) {
+        if (isBlank(inputProducts)) {
+            throw new IllegalArgumentException(BLANK_EXCEPTION_MESSAGE);
+        }
+        if (!isRightFormat(PRODUCT_FORMAT, inputProducts)) {
             throw new IllegalArgumentException(FORMAT_EXCEPTION_MESSAGE);
         }
     }
