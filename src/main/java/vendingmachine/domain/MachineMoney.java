@@ -30,7 +30,7 @@ public class MachineMoney {
         return money >= pickedMoney;
     }
 
-    public MachineMoney subtract(int pickedMoney) {
+    public MachineMoney minus(int pickedMoney) {
         return new MachineMoney(money - pickedMoney);
     }
 

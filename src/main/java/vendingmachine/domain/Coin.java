@@ -27,7 +27,7 @@ public enum Coin {
             int pickedMoney = pick(machineMoney, picker);
             Coin coin = findCoin(pickedMoney);
             coins.put(coin, coins.getOrDefault(coin, 0) + 1);
-            machineMoney = machineMoney.subtract(pickedMoney);
+            machineMoney = machineMoney.minus(pickedMoney);
         }
 
         return coins;
