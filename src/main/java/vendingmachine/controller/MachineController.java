@@ -11,6 +11,7 @@ import vendingmachine.domain.Picker;
 import vendingmachine.domain.Products;
 import vendingmachine.domain.ProductsFactory;
 import vendingmachine.domain.UserMoney;
+import vendingmachine.domain.VendingMachine;
 import vendingmachine.dto.MachineMoneyDto;
 import vendingmachine.dto.ProductDto;
 import vendingmachine.dto.UserMoneyDto;
@@ -32,6 +33,7 @@ public class MachineController {
         Map<Coin, Integer> coins = Coin.generateCoins(machineMoney, picker);
         outputView.printCoins(coins);
         Products products = read(this::getProducts);
+        VendingMachine vendingMachine = VendingMachine.init(products, coins);
         UserMoney userMoney = read(this::getUserMoney);
 
 
