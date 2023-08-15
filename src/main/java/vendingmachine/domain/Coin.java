@@ -28,14 +28,14 @@ public enum Coin {
         while (!machineMoney.isZero()) {
             int pickedMoney = pick(machineMoney, picker);
             Coin coin = findCoin(pickedMoney);
-            addCoint(coins, coin);
+            addCoin(coins, coin);
             machineMoney = machineMoney.minus(pickedMoney);
         }
 
         return MachineCoins.from(coins);
     }
 
-    private static void addCoint(EnumMap<Coin, Integer> coins, Coin coin) {
+    private static void addCoin(EnumMap<Coin, Integer> coins, Coin coin) {
         coins.put(coin, coins.getOrDefault(coin, MIN_COUNT) + PLUS_COUNT);
     }
 
