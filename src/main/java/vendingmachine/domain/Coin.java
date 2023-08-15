@@ -22,6 +22,7 @@ public enum Coin {
 
     public static Map<Coin, Integer> generateCoins(MachineMoney machineMoney, Picker picker) {
         EnumMap<Coin, Integer> coins = new EnumMap<>(Coin.class);
+        initCoins(coins);
         while (!machineMoney.isZero()) {
             int pickedMoney = pick(machineMoney, picker);
             Coin coin = findCoin(pickedMoney);
@@ -30,6 +31,11 @@ public enum Coin {
         }
 
         return coins;
+    }
+
+    private static void initCoins(EnumMap<Coin, Integer> coins) {
+        Stream.of(values())
+                .forEach(coin -> coins.put(coin, 0));
     }
 
     private static int pick(MachineMoney machineMoney, Picker picker) {
