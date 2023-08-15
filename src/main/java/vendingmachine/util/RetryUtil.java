@@ -1,5 +1,6 @@
 package vendingmachine.util;
 
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -28,6 +29,15 @@ public final class RetryUtil {
         } catch (IllegalArgumentException e) {
             outputView.printExceptionMessage(e.getMessage());
             return read(function, t, u);
+        }
+    }
+
+    public static <T, U> void read(BiConsumer<T, U> function, T t, U u) {
+        try {
+            function.accept(t, u);
+        } catch (IllegalArgumentException e) {
+            outputView.printExceptionMessage(e.getMessage());
+            read(function, t, u);
         }
     }
 
