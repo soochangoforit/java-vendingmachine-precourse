@@ -3,6 +3,7 @@ package vendingmachine.controller;
 import static vendingmachine.util.RetryUtil.read;
 
 import java.util.List;
+import java.util.Map;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.MachineCoins;
@@ -42,7 +43,8 @@ public class MachineController {
         while (true) {
             if (userMoney.isLessThanMinimumPrice(vendingMachine) || vendingMachine.isSoldOut()) {
                 // 투입 금액 및 잔돈(동전) 출력
-                System.out.println("투입 금액: " + userMoney.getUserMoney());
+                Map<Coin, Integer> userChangeCoins = vendingMachine.returnChange(userMoney);
+                outputView.printUserChange(userMoney, userChangeCoins);
                 break;
             }
             // 상품 구매 (해당 상품만 재고가 부족한 경우 || 해당 상품에 대한 잔액이 부족한 경우)

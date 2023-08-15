@@ -3,6 +3,7 @@ package vendingmachine.view;
 import java.util.Map;
 
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.UserMoney;
 
 public class OutputView {
 
@@ -25,5 +26,11 @@ public class OutputView {
         System.out.println(COINS_MESSAGE);
         coins.forEach((coin, count) -> System.out.printf(COINS_FORMAT, coin.getAmount(), count));
         System.out.println();
+    }
+
+    public void printUserChange(UserMoney userMoney, Map<Coin, Integer> userChangeCoins) {
+        System.out.println("투입 금액: " + userMoney.getUserMoney() + "원");
+        System.out.println("잔돈: ");
+        userChangeCoins.forEach((coin, count) -> System.out.printf(COINS_FORMAT, coin.getAmount(), count));
     }
 }

@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import java.util.Map;
+
 public class VendingMachine {
     private final Products products;
     private final MachineCoins coins;
@@ -31,5 +33,10 @@ public class VendingMachine {
 
     public int minimumPrice() {
         return products.getMinimumPrice();
+    }
+
+    public Map<Coin, Integer> returnChange(UserMoney userMoney) {
+        int change = userMoney.getUserMoney();
+        return coins.changeToCoins(change);
     }
 }
