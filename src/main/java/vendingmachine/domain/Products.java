@@ -9,4 +9,8 @@ public class Products {
     public Products(List<Product> products) {
         this.products = products;
     }
+
+    public static Products init(List<Product> products) {
+        return new Products(products);
+    }
 }

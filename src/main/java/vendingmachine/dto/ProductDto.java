@@ -1,5 +1,6 @@
 package vendingmachine.dto;
 
+import vendingmachine.domain.Product;
 import vendingmachine.util.NullOrEmptyValidator;
 
 public class ProductDto {
@@ -30,5 +31,9 @@ public class ProductDto {
 
     private static boolean isMinimumPrice(int price) {
         return price >= 100;
+    }
+
+    public Product toProduct() {
+        return Product.init(name, price, quantity);
     }
 }
