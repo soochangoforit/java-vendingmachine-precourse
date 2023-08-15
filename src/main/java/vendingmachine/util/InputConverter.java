@@ -30,9 +30,9 @@ public class InputConverter {
         return List.of(input.split(format));
     }
 
-    private static List<Integer> splitToInt(String input) {
+    private static List<Integer> splitToInt(String format, String input) {
         // TODO : 원하는 구분자에 맞게 구현
-        return List.of(input.split(COMMA_DELIMITER)).stream()
+        return List.of(input.split(format)).stream()
                 .map(Integer::parseInt)
                 .collect(toList());
     }
@@ -58,5 +58,9 @@ public class InputConverter {
 
     private static String getSubstring(String productInfoStr) {
         return productInfoStr.substring(1, productInfoStr.length() - 1);
+    }
+
+    public static int convertUserMoney(String rawUserMoney) {
+        return parseToInt(rawUserMoney);
     }
 }

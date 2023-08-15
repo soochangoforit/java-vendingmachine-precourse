@@ -10,8 +10,10 @@ import vendingmachine.domain.MachineMoney;
 import vendingmachine.domain.Picker;
 import vendingmachine.domain.Products;
 import vendingmachine.domain.ProductsFactory;
+import vendingmachine.domain.UserMoney;
 import vendingmachine.dto.MachineMoneyDto;
 import vendingmachine.dto.ProductDto;
+import vendingmachine.dto.UserMoneyDto;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -30,8 +32,14 @@ public class MachineController {
         Map<Coin, Integer> coins = Coin.generateCoins(machineMoney, picker);
         outputView.printCoins(coins);
         Products products = read(this::getProducts);
+        UserMoney userMoney = read(this::getUserMoney);
 
 
+    }
+
+    private UserMoney getUserMoney() {
+        UserMoneyDto userMoneyDto = inputView.readUserMoney();
+        return UserMoney.from(userMoneyDto.getUserMoney());
     }
 
     private Products getProducts() {

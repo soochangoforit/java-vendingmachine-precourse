@@ -61,6 +61,15 @@ public final class InputValidator {
         }
     }
 
+    public static void validateUserMoney(String rawUserMoney) {
+        if (isBlank(rawUserMoney)) {
+            throw new IllegalArgumentException(BLANK_EXCEPTION_MESSAGE);
+        }
+        if (!isRightFormat(NUMBER_FORMAT, rawUserMoney)) {
+            throw new IllegalArgumentException(FORMAT_EXCEPTION_MESSAGE);
+        }
+    }
+
     /**
      * 공백 및 빈 문자열 체크
      * 주로 사용자 입력으로 부터의 검증이기에 빈문자열 혹은 공백 위주로 검증
