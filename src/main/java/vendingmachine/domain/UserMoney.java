@@ -1,11 +1,12 @@
 package vendingmachine.domain;
 
 import static vendingmachine.domain.ExceptionMessage.INVALID_USER_MONEY;
+import static vendingmachine.domain.ExceptionMessage.NOT_ENOUGH_MONEY;
 
 public class UserMoney {
 
     private static final int MINIMUM_MONEY = 0;
-    private final int userMoney;
+    private int userMoney;
 
     private UserMoney(int userMoney) {
         validate(userMoney);
@@ -28,5 +29,20 @@ public class UserMoney {
 
     public int getUserMoney() {
         return userMoney;
+    }
+
+    public boolean isLessThan(int minimumPrice) {
+        return userMoney < minimumPrice;
+    }
+
+    public void decreaseMoney(int price) {
+        if (isLessThan(price)) {
+            throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
+        }
+        this.userMoney -= price;
+    }
+
+    public boolean isLessThanMinimumPrice(VendingMachine vendingMachine) {
+        return userMoney < vendingMachine.minimumPrice();
     }
 }
