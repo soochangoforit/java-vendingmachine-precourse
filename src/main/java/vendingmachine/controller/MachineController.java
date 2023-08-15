@@ -12,6 +12,7 @@ import vendingmachine.domain.Products;
 import vendingmachine.domain.ProductsFactory;
 import vendingmachine.domain.UserMoney;
 import vendingmachine.domain.VendingMachine;
+import vendingmachine.domain.VendingMachineService;
 import vendingmachine.dto.MachineMoneyDto;
 import vendingmachine.dto.ProductDto;
 import vendingmachine.dto.UserMoneyDto;
@@ -35,6 +36,7 @@ public class MachineController {
         Products products = read(this::getProducts);
         VendingMachine vendingMachine = VendingMachine.init(products, coins);
         UserMoney userMoney = read(this::getUserMoney);
+        VendingMachineService machineService = VendingMachineService.init(vendingMachine, userMoney);
 
 
     }
