@@ -3,9 +3,9 @@ package vendingmachine.controller;
 import static vendingmachine.util.RetryUtil.read;
 
 import java.util.List;
-import java.util.Map;
 
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.MachineCoins;
 import vendingmachine.domain.MachineMoney;
 import vendingmachine.domain.Picker;
 import vendingmachine.domain.ProductInfo;
@@ -32,10 +32,10 @@ public class MachineController {
 
     public void run() {
         MachineMoney machineMoney = read(this::getMachineMoney);
-        Map<Coin, Integer> coins = Coin.generateCoins(machineMoney, picker);
-        outputView.printCoins(coins);
+        MachineCoins machineCoins = Coin.generateCoins(machineMoney, picker);
+        outputView.printCoins(machineCoins.getCoins());
         Products products = read(this::getProducts);
-        VendingMachine vendingMachine = VendingMachine.init(products, coins);
+        VendingMachine vendingMachine = VendingMachine.init(products, machineCoins);
         UserMoney userMoney = read(this::getUserMoney);
 
         // UserMoney가 최저 상품 가격보다 작은 경우 || 모두 소진된 경우 => 잔돈 출력

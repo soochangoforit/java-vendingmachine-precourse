@@ -5,7 +5,6 @@ import static vendingmachine.domain.ExceptionMessage.INVALID_COIN_MONEY;
 
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 
 public enum Coin {
@@ -23,7 +22,7 @@ public enum Coin {
         this.amount = amount;
     }
 
-    public static Map<Coin, Integer> generateCoins(MachineMoney machineMoney, Picker picker) {
+    public static MachineCoins generateCoins(MachineMoney machineMoney, Picker picker) {
         EnumMap<Coin, Integer> coins = new EnumMap<>(Coin.class);
         initCoins(coins);
         while (!machineMoney.isZero()) {
@@ -33,7 +32,7 @@ public enum Coin {
             machineMoney = machineMoney.minus(pickedMoney);
         }
 
-        return coins;
+        return MachineCoins.from(coins);
     }
 
     private static void addCoint(EnumMap<Coin, Integer> coins, Coin coin) {
