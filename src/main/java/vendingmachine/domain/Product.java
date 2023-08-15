@@ -1,15 +1,17 @@
 package vendingmachine.domain;
 
 import static vendingmachine.domain.ExceptionMessage.INVALID_PRODUCT_PRICE;
+import static vendingmachine.domain.ExceptionMessage.SOLD_OUT_PRODUCT;
 
 import vendingmachine.util.NullOrEmptyValidator;
 
 public class Product {
 
     private static final int MINIMUM_PRICE = 100;
+    private static final int ZERO_QUANTITY = 0;
     private final String name;
     private final int price;
-    private final int quantity;
+    private int quantity;
 
     private Product(String name, int price, int quantity) {
         validate(name, price);
@@ -39,5 +41,16 @@ public class Product {
 
     public int getPrice() {
         return price;
+    }
+
+    public boolean isSoldOut() {
+        return quantity == ZERO_QUANTITY;
+    }
+
+    public void decreaseQuantity() {
+        if (isSoldOut()) {
+            throw new IllegalArgumentException(SOLD_OUT_PRODUCT);
+        }
+        this.quantity--;
     }
 }
