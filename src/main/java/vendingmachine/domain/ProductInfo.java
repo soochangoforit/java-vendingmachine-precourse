@@ -8,4 +8,12 @@ public class ProductInfo {
         this.productName = productName;
         this.price = price;
     }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
 }
