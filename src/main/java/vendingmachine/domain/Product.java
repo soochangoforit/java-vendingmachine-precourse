@@ -32,4 +32,8 @@ public class Product {
     public static Product of(String name, int price, int quantity) {
         return new Product(name, price, quantity);
     }
+
+    public boolean isSameName(String productName) {
+        return name.equals(productName);
+    }
 }

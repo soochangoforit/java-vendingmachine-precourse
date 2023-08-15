@@ -12,9 +12,9 @@ import vendingmachine.domain.Products;
 import vendingmachine.domain.ProductsFactory;
 import vendingmachine.domain.UserMoney;
 import vendingmachine.domain.VendingMachine;
-import vendingmachine.domain.VendingMachineService;
 import vendingmachine.dto.MachineMoneyDto;
 import vendingmachine.dto.ProductDto;
+import vendingmachine.dto.ProductToBuyDto;
 import vendingmachine.dto.UserMoneyDto;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -36,9 +36,14 @@ public class MachineController {
         Products products = read(this::getProducts);
         VendingMachine vendingMachine = VendingMachine.init(products, coins);
         UserMoney userMoney = read(this::getUserMoney);
-        VendingMachineService machineService = VendingMachineService.init(vendingMachine, userMoney);
+        ProductToBuyDto productToBuyDto = read(this::getProductToBuy, vendingMachine, userMoney);
 
+    }
 
+    private ProductToBuyDto getProductToBuy(VendingMachine vendingMachine, UserMoney userMoney) {
+        ProductToBuyDto productToBuyDto = inputView.readProductToBuy(userMoney);
+        vendingMachine.validateExistProduct(productToBuyDto.getProductName());
+        return productToBuyDto;
     }
 
     private UserMoney getUserMoney() {

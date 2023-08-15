@@ -7,6 +7,8 @@ public class ExceptionMessage {
     public static final String INVALID_PRODUCT_PRICE = "상품의 가격은 100원 이상여야 합니다.";
     public static final String INVALID_USER_MONEY = "투입 금액은 0원 이상이어야 합니다.";
 
+    public static final String INVALID_PRODUCT_NAME = "존재하지 않는 상품 이름입니다.";
+
     private ExceptionMessage() {
     }
 }

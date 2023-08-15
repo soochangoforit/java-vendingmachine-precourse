@@ -14,4 +14,8 @@ public class VendingMachine {
     public static VendingMachine init(final Products products, final Map<Coin, Integer> coins) {
         return new VendingMachine(products, coins);
     }
+
+    public void validateExistProduct(String productName) {
+        products.validateExistProduct(productName);
+    }
 }

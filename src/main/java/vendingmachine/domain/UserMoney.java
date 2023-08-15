@@ -25,4 +25,8 @@ public class UserMoney {
     public static UserMoney from(int userMoney) {
         return new UserMoney(userMoney);
     }
+
+    public int getUserMoney() {
+        return userMoney;
+    }
 }

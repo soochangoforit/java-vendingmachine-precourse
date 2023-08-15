@@ -7,6 +7,12 @@ import java.util.regex.Pattern;
  */
 public final class InputValidator {
 
+    // 한글만 가능, 구분자 없음
+    private static final Pattern KOR_FORMAT = Pattern.compile("[가-힣]+");
+
+    // 영어만 가능, 구분자 없음
+    private static final Pattern ENG_FORMAT = Pattern.compile("[A-Za-z]+");
+
     // 한글만 가능, "," 구분자
     private static final Pattern KOR_COMMA_FORMAT = Pattern.compile("[가-힣]+(,[가-힣]+)*");
 
@@ -66,6 +72,15 @@ public final class InputValidator {
             throw new IllegalArgumentException(BLANK_EXCEPTION_MESSAGE);
         }
         if (!isRightFormat(NUMBER_FORMAT, rawUserMoney)) {
+            throw new IllegalArgumentException(FORMAT_EXCEPTION_MESSAGE);
+        }
+    }
+
+    public static void validateProductToBuy(String productToBuy) {
+        if (isBlank(productToBuy)) {
+            throw new IllegalArgumentException(BLANK_EXCEPTION_MESSAGE);
+        }
+        if (!isRightFormat(KOR_FORMAT, productToBuy)) {
             throw new IllegalArgumentException(FORMAT_EXCEPTION_MESSAGE);
         }
     }
