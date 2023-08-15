@@ -37,14 +37,24 @@ public class MachineController {
         Products products = read(this::getProducts);
         VendingMachine vendingMachine = VendingMachine.init(products, coins);
         UserMoney userMoney = read(this::getUserMoney);
-        ProductInfo productToBuy = read(this::getProductToBuy, vendingMachine, userMoney);
 
+        // UserMoney가 최저 상품 가격보다 작은 경우 || 모두 소진된 경우 => 잔돈 출력
+        while (true) {
+            if (userMoney.isLessThanMinimumPrice(vendingMachine) || vendingMachine.isSoldOut()) {
+                // 투입 금액 및 잔돈(동전) 출력
+                System.out.println("투입 금액: " + userMoney.getUserMoney());
+                break;
+            }
+            // 상품 구매 (해당 상품만 재고가 부족한 경우 || 해당 상품에 대한 잔액이 부족한 경우)
+            read(this::buyProduct, vendingMachine, userMoney);
+        }
 
     }
 
-    private ProductInfo getProductToBuy(VendingMachine vendingMachine, UserMoney userMoney) {
+    private void buyProduct(VendingMachine vendingMachine, UserMoney userMoney) {
         ProductToBuyDto productToBuyDto = inputView.readProductToBuy(userMoney);
-        return vendingMachine.getProduct(productToBuyDto.getProductName());
+        ProductInfo productToBuy = vendingMachine.getProduct(productToBuyDto.getProductName());
+        vendingMachine.buyProduct(productToBuy, userMoney);
     }
 
     private UserMoney getUserMoney() {
