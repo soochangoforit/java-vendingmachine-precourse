@@ -15,16 +15,13 @@ public class VendingMachine {
         return new VendingMachine(products, coins);
     }
 
-    public ProductInfo getProduct(String productName) {
-        return products.getProduct(productName);
-    }
-
 
     public boolean isAllSoldOut() {
         return products.isSoldOut();
     }
 
-    public void buyProduct(ProductInfo productToBuy, UserMoney userMoney) {
+    public void buyProduct(String productName, UserMoney userMoney) {
+        ProductInfo productToBuy = products.getProduct(productName);
         // 재고 감소
         products.decreaseProduct(productToBuy.getProductName());
         // 사용자 돈 감소
