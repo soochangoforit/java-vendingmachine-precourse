@@ -33,7 +33,6 @@ public class VendingMachine {
     }
 
     public Map<Coin, Integer> returnChange(UserMoney userMoney) {
-        //int change = userMoney.getUserMoney();
         return coins.changeToUserCoins(userMoney);
     }
 }
