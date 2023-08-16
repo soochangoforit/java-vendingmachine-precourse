@@ -57,9 +57,13 @@ public enum Coin {
 
     private static Coin findCoin(int pickedMoney) {
         return Stream.of(values())
-                .filter(coin -> coin.getAmount() == pickedMoney)
+                .filter(coin -> coin.isSame(pickedMoney))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_COIN_MONEY));
+    }
+
+    private boolean isSame(int pickedMoney) {
+        return amount == pickedMoney;
     }
 
     private static List<Integer> coinValues() {
