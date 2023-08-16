@@ -18,6 +18,10 @@ public class Products {
     }
 
     public Product getProduct(String productName) {
+        return findProductByName(productName);
+    }
+
+    private Product findProductByName(String productName) {
         return products.stream()
                 .filter(product -> product.isSameName(productName))
                 .findFirst()
@@ -36,4 +40,7 @@ public class Products {
                 .allMatch(Product::isSoldOut);
     }
 
+    public void validateExistProduct(String name) {
+        findProductByName(name);
+    }
 }
