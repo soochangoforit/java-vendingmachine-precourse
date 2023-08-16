@@ -26,7 +26,7 @@ public class MachineMoney {
         return new MachineMoney(money);
     }
 
-    public boolean isLeftMoreThan(int pickedMoney) {
+    public boolean isBiggerThan(int pickedMoney) {
         return money >= pickedMoney;
     }
 

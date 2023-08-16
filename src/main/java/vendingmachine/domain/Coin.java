@@ -22,6 +22,7 @@ public enum Coin {
         this.amount = amount;
     }
 
+    // TODO : 나만의 규칙으로 분석 필요
     public static MachineCoins generateCoins(MachineMoney machineMoney, Picker picker) {
         EnumMap<Coin, Integer> coins = new EnumMap<>(Coin.class);
         initCoins(coins);
@@ -41,12 +42,13 @@ public enum Coin {
 
     private static void initCoins(EnumMap<Coin, Integer> coins) {
         Stream.of(values())
-                .forEach(coin -> coins.put(coin, 0));
+                .forEach(coin -> coins.put(coin, MIN_COUNT));
     }
 
+    // TODO : 나만의 규칙으로 분석 필요
     private static int pick(MachineMoney machineMoney, Picker picker) {
         int pickedMoney = picker.pick(coinValues());
-        boolean canBeCoin = machineMoney.isLeftMoreThan(pickedMoney);
+        boolean canBeCoin = machineMoney.isBiggerThan(pickedMoney);
         if (canBeCoin) {
             return pickedMoney;
         }

@@ -14,6 +14,7 @@ public final class RetryUtil {
     private RetryUtil() {
     }
 
+
     public static <T> T read(Supplier<T> supplier) {
         try {
             return supplier.get();
@@ -23,6 +24,7 @@ public final class RetryUtil {
         }
     }
 
+    // TODO : 나만의 규칙으로 분석 필요
     public static <T, U, R> R read(BiFunction<T, U, R> function, T t, U u) {
         try {
             return function.apply(t, u);
@@ -32,6 +34,7 @@ public final class RetryUtil {
         }
     }
 
+    // TODO : 나만의 규칙으로 분석 필요
     public static <T, U> void read(BiConsumer<T, U> function, T t, U u) {
         try {
             function.accept(t, u);
