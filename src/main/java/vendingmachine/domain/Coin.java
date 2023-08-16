@@ -17,6 +17,7 @@ public enum Coin {
     private static final int MIN_COUNT = 0;
     private static final int PLUS_COUNT = 1;
 
+    private static final int MAX_RECURSIVE_COUNT = 100;
     private final int amount;
 
     Coin(final int amount) {
@@ -49,6 +50,7 @@ public enum Coin {
     // TODO : 나만의 규칙으로 분석 필요
     private static int pick(MachineMoney machineMoney, Picker picker) {
         return Stream.generate(() -> picker.pick(coinValues()))
+                .limit(MAX_RECURSIVE_COUNT)
                 .filter(pickedMoney -> machineMoney.isBiggerThan(pickedMoney))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_PICKED_MONEY));
