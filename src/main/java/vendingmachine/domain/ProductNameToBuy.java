@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-import vendingmachine.util.NullOrEmptyValidator;
+import vendingmachine.util.ParamValidator;
 
 public class ProductNameToBuy {
 
@@ -13,8 +13,8 @@ public class ProductNameToBuy {
     }
 
     private void validate(String name, VendingMachine vendingMachine) {
-        NullOrEmptyValidator.throwIfNullOrBlank(name);
-        NullOrEmptyValidator.throwIfNull(vendingMachine);
+        ParamValidator.throwIfNullOrBlank(name);
+        ParamValidator.throwIfNull(vendingMachine);
         vendingMachine.validateExistProduct(name);
     }
 

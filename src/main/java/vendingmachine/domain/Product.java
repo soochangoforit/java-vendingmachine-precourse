@@ -3,7 +3,7 @@ package vendingmachine.domain;
 import static vendingmachine.domain.ExceptionMessage.INVALID_PRODUCT_PRICE;
 import static vendingmachine.domain.ExceptionMessage.SOLD_OUT_PRODUCT;
 
-import vendingmachine.util.NullOrEmptyValidator;
+import vendingmachine.util.ParamValidator;
 
 public class Product {
 
@@ -21,7 +21,7 @@ public class Product {
     }
 
     private void validate(String name, int price) {
-        NullOrEmptyValidator.throwIfNullOrBlank(name);
+        ParamValidator.throwIfNullOrBlank(name);
         if (!isMinimumPrice(price)) {
             throw new IllegalArgumentException(INVALID_PRODUCT_PRICE);
         }

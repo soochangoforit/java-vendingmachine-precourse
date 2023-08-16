@@ -7,13 +7,13 @@ import java.util.Objects;
 /**
  * 주로 Dto 혹은 Domain에서 주로 사용
  */
-public final class NullOrEmptyValidator {
+public final class ParamValidator {
 
     private static final String NULL_MESSAGE = "NULL 이 포함되면 안 됩니다.";
     private static final String BLANK_MESSAGE = "매개변수에 Null 혹은 빈문자열 이 포함되면 안 됩니다.";
     private static final String EMPTY_MESSAGE = "비어있는 값(Null, Empty)가 있으면 안 됩니다.";
 
-    private NullOrEmptyValidator() {
+    private ParamValidator() {
     }
 
     /**
