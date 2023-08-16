@@ -2,6 +2,7 @@ package vendingmachine.domain;
 
 import static java.util.stream.Collectors.toList;
 import static vendingmachine.domain.ExceptionMessage.INVALID_COIN_MONEY;
+import static vendingmachine.domain.ExceptionMessage.INVALID_PICKED_MONEY;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -47,13 +48,12 @@ public enum Coin {
 
     // TODO : 나만의 규칙으로 분석 필요
     private static int pick(MachineMoney machineMoney, Picker picker) {
-        int pickedMoney = picker.pick(coinValues());
-        boolean canBeCoin = machineMoney.isBiggerThan(pickedMoney);
-        if (canBeCoin) {
-            return pickedMoney;
-        }
-        return pick(machineMoney, picker);
+        return Stream.generate(() -> picker.pick(coinValues()))
+                .filter(pickedMoney -> machineMoney.isBiggerThan(pickedMoney))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_PICKED_MONEY));
     }
+
 
     private static Coin findCoin(int pickedMoney) {
         return Stream.of(values())

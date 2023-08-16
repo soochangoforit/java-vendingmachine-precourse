@@ -10,6 +10,8 @@ public class ExceptionMessage {
     public static final String INVALID_PRODUCT = "상품이 존재하지 않습니다.";
     public static final String SOLD_OUT_PRODUCT = "품절된 상품입니다.";
     public static final String NOT_ENOUGH_MONEY = "해당 상품을 구매하기 위한 잔돈이 부족합니다.";
+    public static final String INVALID_PICKED_MONEY = "선택된 동전으로 자판기가 소유한 돈을 표현할 수 없습니다.";
+
 
     private ExceptionMessage() {
     }
