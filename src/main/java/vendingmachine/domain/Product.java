@@ -21,7 +21,7 @@ public class Product {
     }
 
     private void validate(String name, int price) {
-        NullOrEmptyValidator.throwIfBlank(name);
+        NullOrEmptyValidator.throwIfNullOrBlank(name);
         if (!isMinimumPrice(price)) {
             throw new IllegalArgumentException(INVALID_PRODUCT_PRICE);
         }

@@ -9,6 +9,7 @@ import vendingmachine.domain.Coin;
 import vendingmachine.domain.MachineCoins;
 import vendingmachine.domain.MachineMoney;
 import vendingmachine.domain.Picker;
+import vendingmachine.domain.ProductNameToBuy;
 import vendingmachine.domain.Products;
 import vendingmachine.domain.ProductsFactory;
 import vendingmachine.domain.UserMoney;
@@ -67,8 +68,9 @@ public class MachineController {
 
 
     private void buyProduct(VendingMachine vendingMachine, UserMoney userMoney) {
-        ProductToBuyDto productToBuyDto = inputView.readProductToBuy(userMoney);
-        vendingMachine.buyProduct(productToBuyDto.getProductName(), userMoney);
+        ProductToBuyDto productToBuyDto = read(inputView::readProductToBuy, userMoney);
+        ProductNameToBuy productNameToBuy = ProductNameToBuy.from(productToBuyDto.getProductName(), vendingMachine);
+        vendingMachine.buyProduct(productNameToBuy.getProductName(), userMoney);
     }
 
     private UserMoney getUserMoney() {

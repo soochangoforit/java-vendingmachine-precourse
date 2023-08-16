@@ -35,4 +35,8 @@ public class VendingMachine {
     public Map<Coin, Integer> returnChange(UserMoney userMoney) {
         return coins.changeToUserCoins(userMoney);
     }
+
+    public void validateExistProduct(String productName) {
+        products.validateExistProduct(productName);
+    }
 }

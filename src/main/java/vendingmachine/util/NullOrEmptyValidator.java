@@ -19,7 +19,7 @@ public final class NullOrEmptyValidator {
     /**
      * null 체크
      *
-     * @param object String, Wrapper 클래스가 대상이 된다.
+     * @param object Wrapper 클래스가 대상이 된다.
      */
     public static void throwIfNull(Object object) {
         if (Objects.isNull(object)) {
@@ -29,12 +29,12 @@ public final class NullOrEmptyValidator {
 
 
     /**
-     * 주로 String 값에 대해, 공백과 빈 문자열로만 이루어졌느지 검증
+     * 주로 String 값에 대해, Null과 공백과 빈 문자열로만 이루어졌느지 검증
      *
-     * @param filed 매개변수 값
+     * @param filed String 매개변수 값
      */
-    public static void throwIfBlank(String filed) {
-        if (filed.isBlank()) {
+    public static void throwIfNullOrBlank(String filed) {
+        if (Objects.isNull(filed) || filed.isBlank()) {
             throw new IllegalArgumentException(BLANK_MESSAGE);
         }
     }
