@@ -9,7 +9,7 @@ public class Products {
 
     private final List<Product> products;
 
-    public Products(List<Product> products) {
+    private Products(List<Product> products) {
         this.products = products;
     }
 
