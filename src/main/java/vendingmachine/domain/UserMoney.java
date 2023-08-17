@@ -31,15 +31,15 @@ public class UserMoney {
         return userMoney;
     }
 
-    public boolean isLessThan(int minimumPrice) {
-        return userMoney < minimumPrice;
+    private boolean isLessThan(int price) {
+        return userMoney < price;
     }
 
-    public void decreaseMoney(int price) {
-        if (isLessThan(price)) {
+    public void decreaseMoney(int productPrice) {
+        if (isLessThan(productPrice)) {
             throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
         }
-        this.userMoney -= price;
+        this.userMoney -= productPrice;
     }
 
     public boolean isLessThanMinimumPrice(VendingMachine vendingMachine) {
