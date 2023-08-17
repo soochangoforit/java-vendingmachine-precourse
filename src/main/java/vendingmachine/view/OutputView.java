@@ -10,6 +10,7 @@ public class OutputView {
     private static final String COINS_MESSAGE = "자판기가 보유한 동전";
     // 500원 - 0개
     private static final String COINS_FORMAT = "%d원 - %d개\n";
+    private static final String EXCEPTION_MESSAGE_FORMAT = "[ERROR] %s\n";
 
     private OutputView() {
     }
@@ -19,7 +20,7 @@ public class OutputView {
     }
 
     public void printExceptionMessage(String message) {
-        System.out.println(message);
+        System.out.printf(EXCEPTION_MESSAGE_FORMAT, message);
     }
 
     public void printCoins(Map<Coin, Integer> coins) {
