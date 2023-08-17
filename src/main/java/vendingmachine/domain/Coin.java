@@ -24,7 +24,6 @@ public enum Coin {
         this.amount = amount;
     }
 
-    // TODO : 나만의 규칙으로 분석 필요 (완료)
     public static MachineCoins generateCoins(MachineMoney machineMoney, Picker picker) {
         EnumMap<Coin, Integer> coins = new EnumMap<>(Coin.class);
         initCoins(coins);
@@ -47,7 +46,6 @@ public enum Coin {
                 .forEach(coin -> coins.put(coin, MIN_COUNT));
     }
 
-    // TODO : 나만의 규칙으로 분석 필요 (완료)
     private static int pick(MachineMoney machineMoney, Picker picker) {
         return Stream.generate(() -> picker.pick(coinValues()))
                 .limit(MAX_RECURSIVE_COUNT)

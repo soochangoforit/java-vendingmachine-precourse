@@ -48,7 +48,6 @@ public final class InputValidator {
     private InputValidator() {
     }
 
-    // TODO : 본격적으로 프로덕션 코드에 사용할 메서드들을 구현
     public static void validateMachineMoney(String machineMoney) {
         if (isBlank(machineMoney)) {
             throw new IllegalArgumentException(BLANK_EXCEPTION_MESSAGE);
