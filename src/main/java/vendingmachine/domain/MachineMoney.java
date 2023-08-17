@@ -2,6 +2,8 @@ package vendingmachine.domain;
 
 import static vendingmachine.domain.ExceptionMessage.INVALID_MACHINE_MONEY;
 
+import java.util.Objects;
+
 public class MachineMoney {
     public static final int DIVIDABLE_MIN_MONEY = 10;
     public static final int ZERO = 0;
@@ -36,5 +38,18 @@ public class MachineMoney {
 
     public boolean isZero() {
         return money == ZERO;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MachineMoney that = (MachineMoney) o;
+        return money == that.money;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
     }
 }
