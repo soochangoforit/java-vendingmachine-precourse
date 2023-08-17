@@ -17,7 +17,7 @@ public class VendingMachine {
 
 
     public boolean isAllSoldOut() {
-        return products.isSoldOut();
+        return products.isAllSoldOut();
     }
 
     public void buyProduct(String productName, UserMoney userMoney) {

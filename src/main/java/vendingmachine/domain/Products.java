@@ -35,7 +35,7 @@ public class Products {
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_PRODUCT));
     }
 
-    public boolean isSoldOut() {
+    public boolean isAllSoldOut() {
         return products.stream()
                 .allMatch(Product::isSoldOut);
     }
