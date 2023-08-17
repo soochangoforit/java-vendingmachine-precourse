@@ -3,6 +3,8 @@ package vendingmachine.domain;
 import static vendingmachine.domain.ExceptionMessage.INVALID_PRODUCT_PRICE;
 import static vendingmachine.domain.ExceptionMessage.SOLD_OUT_PRODUCT;
 
+import java.util.Objects;
+
 import vendingmachine.util.ParamValidator;
 
 public class Product {
@@ -52,5 +54,19 @@ public class Product {
             throw new IllegalArgumentException(SOLD_OUT_PRODUCT);
         }
         this.quantity--;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return price == product.price && quantity == product.quantity && Objects.equals(name, product.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, price, quantity);
     }
 }
