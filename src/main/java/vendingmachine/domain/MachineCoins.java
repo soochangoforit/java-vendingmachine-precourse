@@ -1,6 +1,5 @@
 package vendingmachine.domain;
 
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -23,13 +22,15 @@ public class MachineCoins {
 
     public Map<Coin, Integer> changeToUserCoins(UserMoney userMoney) {
         Map<Coin, Integer> userCoins = new EnumMap<>(Coin.class);
-        Arrays.stream(Coin.values())
-                .filter(coin -> isCoinAvailableForChange(coin, userMoney.getUserMoney()))
-                .forEach(coin -> {
-                    int count = determineCoinCount(coin, userMoney.getUserMoney());
-                    userCoins.put(coin, count);
-                    userMoney.decreaseMoney(coin.getAmount() * count);
-                });
+        int userChange = userMoney.getUserMoney();
+        for (Coin coin : Coin.values()) {
+            if (isCoinAvailableForChange(coin, userChange)) {
+                int count = determineCoinCount(coin, userChange);
+                userCoins.put(coin, count);
+                userChange -= (coin.getAmount() * count);
+            }
+        }
+
         return userCoins;
     }
 
