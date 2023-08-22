@@ -3,15 +3,14 @@ package vendingmachine.controller;
 import static vendingmachine.util.RetryUtil.read;
 
 import java.util.List;
-import java.util.Map;
 
-import vendingmachine.domain.Coin;
 import vendingmachine.domain.MachineCoins;
 import vendingmachine.domain.MachineMoney;
 import vendingmachine.domain.Picker;
 import vendingmachine.domain.ProductNameToBuy;
 import vendingmachine.domain.Products;
 import vendingmachine.domain.ProductsFactory;
+import vendingmachine.domain.UserChangeCoins;
 import vendingmachine.domain.UserMoney;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.dto.MachineMoneyDto;
@@ -45,7 +44,8 @@ public class MachineController {
     }
 
     private MachineCoins getMachineCoins(MachineMoney machineMoney) {
-        MachineCoins machineCoins = Coin.generateCoins(machineMoney, picker);
+        MachineCoins machineCoins = MachineCoins.init();
+        machineCoins.generateCoins(machineMoney, picker);
         outputView.printCoins(machineCoins.getCoins());
         return machineCoins;
     }
@@ -62,8 +62,8 @@ public class MachineController {
     }
 
     private void processUserChange(VendingMachine vendingMachine, UserMoney userMoney) {
-        Map<Coin, Integer> userChangeCoins = vendingMachine.returnChange(userMoney);
-        outputView.printUserChange(userMoney, userChangeCoins);
+        UserChangeCoins userChangeCoins = vendingMachine.returnChange(userMoney);
+        outputView.printUserChange(userMoney, userChangeCoins.getUserCoins());
     }
 
 

@@ -45,4 +45,12 @@ public class UserMoney {
     public boolean isLessThanMinimumPrice(VendingMachine vendingMachine) {
         return userMoney < vendingMachine.minimumPrice();
     }
+
+    public boolean isBiggerThan(int amount) {
+        return userMoney >= amount;
+    }
+
+    public int getMinCoinCount(int amount) {
+        return userMoney / amount;
+    }
 }

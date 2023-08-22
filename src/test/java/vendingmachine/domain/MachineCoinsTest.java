@@ -2,11 +2,31 @@ package vendingmachine.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.EnumMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
 class MachineCoinsTest {
+
+    @Test
+    void generateCoins는_picker을_이용해서_동전_반환() {
+        MachineMoney machineMoney = MachineMoney.init(1000);
+        Picker picker = (list) -> 500;
+        Map<Coin, Integer> expectedCoins = new EnumMap<>(Coin.class) {
+            {
+                put(Coin.COIN_500, 2);
+                put(Coin.COIN_100, 0);
+                put(Coin.COIN_50, 0);
+                put(Coin.COIN_10, 0);
+            }
+        };
+
+        MachineCoins machineCoins = MachineCoins.init();
+        machineCoins.generateCoins(machineMoney, picker);
+
+        assertThat(machineCoins.getCoins()).isEqualTo(expectedCoins);
+    }
 
     @Test
     void changeToUserCoins는_사용자의_잔돈을_받아서_최소_동전의_개수로_반환한다() {
@@ -18,9 +38,9 @@ class MachineCoinsTest {
         ));
         UserMoney userMoney = UserMoney.from(150);
 
-        Map<Coin, Integer> userChanges = machineCoins.changeToUserCoins(userMoney);
+        UserChangeCoins userChangeCoins = machineCoins.returnUserChange(userMoney);
 
-        assertThat(userChanges).contains(Map.entry(Coin.COIN_100, 1), Map.entry(Coin.COIN_50, 1));
+        assertThat(userChangeCoins.getUserCoins()).contains(Map.entry(Coin.COIN_100, 1), Map.entry(Coin.COIN_50, 1));
     }
 
     @Test
@@ -32,10 +52,9 @@ class MachineCoinsTest {
                 Coin.COIN_10, 0
         ));
         UserMoney userMoney = UserMoney.from(90);
+        UserChangeCoins userChangeCoins = machineCoins.returnUserChange(userMoney);
 
-        Map<Coin, Integer> userChanges = machineCoins.changeToUserCoins(userMoney);
-
-        assertThat(userChanges).isEmpty();
+        assertThat(userChangeCoins.getUserCoins()).isEmpty();
     }
 
     @Test
@@ -47,10 +66,9 @@ class MachineCoinsTest {
                 Coin.COIN_10, 1
         ));
         UserMoney userMoney = UserMoney.from(500);
+        UserChangeCoins userChangeCoins = machineCoins.returnUserChange(userMoney);
 
-        Map<Coin, Integer> userChanges = machineCoins.changeToUserCoins(userMoney);
-
-        assertThat(userChanges).contains(Map.entry(Coin.COIN_50, 1), Map.entry(Coin.COIN_10, 1));
+        assertThat(userChangeCoins.getUserCoins()).contains(Map.entry(Coin.COIN_50, 1), Map.entry(Coin.COIN_10, 1));
     }
 
 
